@@ -8,7 +8,11 @@ export ZSH="/home/renyddd/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="obraun"
+ZSH_THEME="random"
+# ZSH_THEME="obraun"
+# ZSH_THEME="fino-time"
+# philips.zsh-theme
+# gentoo
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -108,6 +112,11 @@ alias s="screenfetch"
 alias py="python3"
 alias pc="pycharm"
 alias ra="ranger"
+alias arm="arm-linux-gcc"
 source /home/renyddd/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 eval $(thefuck --alias)
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export PATH=/usr/local/arm/5.4.0/usr/bin:$PATH

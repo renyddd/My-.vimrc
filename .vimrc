@@ -20,9 +20,10 @@ set smartcase
 
 " 保证屏幕最上与最下有 5 行留白
 set scrolloff=5
-
 " 禁止向下兼容 vi
 set nocompatible
+" 取消折叠功能
+set nofoldenable
 
 " some conf for some plug
 filetype on
@@ -43,6 +44,7 @@ map <up> :res +5<CR>
 map <down> :res -5 <CR>
 map <left> :vertical resize-5<CR>
 map <right> :vertical resize+5<CR>
+
 " set leader key to the space.
 let mapleader=' '
 
@@ -50,10 +52,15 @@ let mapleader=' '
 map <LEADER><LEADER> <Esc>/<++><CR>:nohlsearch<CR>c4l
 map <LEADER>, <Esc>a<++>
 map <LEADER>[ i{<CR>}<Esc>ko
+map <LEADER>o o<Esc>k
+
 
 " Call figlet
 map tx :r !figlet 
 
+" ===
+" === plugged
+" ===
 call plug#begin('~/.vim/plugged')
 
 Plug 'vim-airline/vim-airline'
