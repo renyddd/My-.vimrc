@@ -64,6 +64,7 @@ nnoremap <C-l> zz
 inoremap <C-l> <Esc>zzi
 
 inoremap ( ()<Esc>i
+inoremap ) <Esc>f)a
 inoremap [ []<Esc>i
 " inoremap { {}<Esc>i
 inoremap { {}<Esc>i<CR><Esc>ko
