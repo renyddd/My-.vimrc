@@ -54,23 +54,37 @@ map <LEADER><LEADER> <Esc>/<++><CR>:nohlsearch<CR>c4l
 map <LEADER>, <Esc>a<++>
 map <LEADER>[ i{<CR>}<Esc>ko
 map <LEADER>o o<Esc>k
-map <LEADER>r :source /root/.config/nvim/init.vim
+map <LEADER>r :source $HOME/.config/nvim/init.vim
 
 " inoremap 只在 insert 模式下生效
 " vnoremap 只在 visual 模式下生效
 " nnoremap 就在 normal 模式下生效
 "
 nnoremap <C-l> zz
-inoremap <C-l> <Esc>zzi
+inoremap <C-l> <Esc>zza
 
 inoremap ( ()<Esc>i
 inoremap ) <Esc>f)a
 inoremap [ []<Esc>i
+inoremap ] <Esc>f]a
 " inoremap { {}<Esc>i
 inoremap { {}<Esc>i<CR><Esc>ko
 inoremap " ""<Esc>i
 
-" Call figlet, install first.
+" ===
+" === snippet
+" ===
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-n>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" ===
+" === Markdown-Preview for neovim
+" ===
+
+" ===
+" === Call figlet, install first.
+" ===
 map tx :r !figlet 
 
 " firtst use! searsh vim-plug in github.
@@ -90,8 +104,12 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'vim-airline/vim-airline'
 Plug 'connorholyday/vim-snazzy'
-" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer'}
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+" Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
+
 
 call plug#end()
 " https://github.com/junegunn/vim-plug/wiki/tutorial
