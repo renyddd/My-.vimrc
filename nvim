@@ -48,13 +48,14 @@ map <right> :vertical resize+5<CR>
 
 " set leader key to the space.
 let mapleader=' '
+" 以 f 打头表示文件相关操作
 
 " Press space twice to jump to the next '<++>' and edit it.
 map <LEADER><LEADER> <Esc>/<++><CR>:nohlsearch<CR>c4l
 map <LEADER>, <Esc>a<++>
 map <LEADER>[ i{<CR>}<Esc>ko
 map <LEADER>o o<Esc>k
-map <LEADER>r :source $HOME/.config/nvim/init.vim
+map <LEADER>R :source $HOME/.config/nvim/init.vim<CR>
 
 " inoremap 只在 insert 模式下生效
 " vnoremap 只在 visual 模式下生效
@@ -71,11 +72,27 @@ inoremap ] <Esc>f]a
 inoremap { {}<Esc>i<CR><Esc>ko
 inoremap " ""<Esc>i
 
+map <LEADER>fr :call CompileRunGcc()<CR>
+func! CompileRunGcc()
+    exec "w" 
+    if &filetype == 'c' 
+        exec '!g++ % -o /tmp/%<'
+        exec '! /tmp/%<'
+    elseif &filetype == 'cpp'
+        exec '!g++ % -o /tmp/%<'
+        exec '! /tmp/%<'
+    elseif &filetype == 'python'
+        exec '! python3 %'
+    elseif &filetype == 'sh'
+        :! bash %
+    endif                                                                              
+endfunc 
+
 " ===
 " === snippet
 " ===
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-n>"
+" let g:UltiSnipsExpandTrigger="<c-m>"
+" let g:UltiSnipsJumpForwardTrigger="<c-n>"
 " let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " ===
@@ -86,6 +103,12 @@ let g:UltiSnipsJumpForwardTrigger="<c-n>"
 " === Call figlet, install first.
 " ===
 map tx :r !figlet 
+
+" ===
+" === NERDTree 
+" ===
+map nt :NERDTreeToggle<CR>
+" ?........Toggle the display of the quick help
 
 " firtst use! searsh vim-plug in github.
 " curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
@@ -106,12 +129,11 @@ Plug 'vim-airline/vim-airline'
 Plug 'connorholyday/vim-snazzy'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer'}
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
+" Plug 'SirVer/ultisnips'
+" Plug 'honza/vim-snippets'
 " Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
+Plug 'preservim/nerdtree'
 
 
 call plug#end()
 " https://github.com/junegunn/vim-plug/wiki/tutorial
-
-
