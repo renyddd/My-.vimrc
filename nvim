@@ -49,38 +49,39 @@ map <right> :vertical resize+5<CR>
 " set leader key to the space.
 let mapleader=' '
 " 以 f 打头表示文件相关操作
+" 以 m 打头表示与 markdown 格式相关操作
 
 " Press space twice to jump to the next '<++>' and edit it.
 map <LEADER><LEADER> <Esc>/<++><CR>:nohlsearch<CR>c4l
 map <LEADER>, <Esc>a<++>
-map <LEADER>[ i{<CR>}<Esc>ko
 map <LEADER>o o<Esc>k
-map <LEADER>R :source $HOME/.config/nvim/init.vim<CR>
+map <LEADER>mc o```<++><CR>```<Esc>kk
 
+" 实现类似 Emacs 的 ctrl + l 功能
+nnoremap <C-l> zz
+inoremap <C-l> <Esc>zza
 " inoremap 只在 insert 模式下生效
 " vnoremap 只在 visual 模式下生效
 " nnoremap 就在 normal 模式下生效
-"
-nnoremap <C-l> zz
-inoremap <C-l> <Esc>zza
-
 inoremap ( ()<Esc>i
 inoremap ) <Esc>f)a
 inoremap [ []<Esc>i
 inoremap ] <Esc>f]a
 " inoremap { {}<Esc>i
 inoremap { {}<Esc>i<CR><Esc>ko
+inoremap } <Esc>k$JJxha
 inoremap " ""<Esc>i
 
 map <LEADER>fr :call CompileRunGcc()<CR>
 func! CompileRunGcc()
     exec "w" 
     if &filetype == 'c' 
-        exec '!g++ % -o /tmp/%<'
-        exec '! /tmp/%<'
+        exec '!gcc % -o /tmp/%< && /tmp/%<'
     elseif &filetype == 'cpp'
-        exec '!g++ % -o /tmp/%<'
-        exec '! /tmp/%<'
+        exec '!g++ % -o /tmp/%< && /tmp/%<'
+        " exec '! /tmp/%<'
+    elseif &filetype == 'go'
+        exec '!go run %'
     elseif &filetype == 'python'
         exec '! python3 %'
     elseif &filetype == 'sh'
@@ -133,7 +134,6 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " Plug 'honza/vim-snippets'
 " Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 Plug 'preservim/nerdtree'
-
 
 call plug#end()
 " https://github.com/junegunn/vim-plug/wiki/tutorial
